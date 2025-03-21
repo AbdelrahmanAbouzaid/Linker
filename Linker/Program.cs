@@ -1,3 +1,6 @@
+using Linker.Web.DAL.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Linker
 {
     public class Program
@@ -8,6 +11,10 @@ namespace Linker
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDbContext>(option => 
+            {
+                option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             var app = builder.Build();
 
